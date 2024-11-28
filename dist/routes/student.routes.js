@@ -8,6 +8,7 @@ const student_controller_1 = __importDefault(require("../controllers/student.con
 const studentRouter = (0, express_1.Router)();
 // Routes
 studentRouter.get('/', student_controller_1.default.getAllStudents);
+studentRouter.get('/search', student_controller_1.default.getStudentByName);
 studentRouter.get('/:id', student_controller_1.default.getStudentById);
 studentRouter.post('/', student_controller_1.default.addStudent);
 studentRouter.put('/:id', student_controller_1.default.updateStudentById);

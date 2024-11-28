@@ -36,6 +36,22 @@ const getStudentById = (req, res) => __awaiter(void 0, void 0, void 0, function*
         res.status(500).json({ error: 'Unable to get student by id' });
     }
 });
+// Get student by name
+const getStudentByName = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { firstname } = req.query;
+        const student = yield student_model_1.Student.find({ firstname: { $regex: firstname, $options: 'i' } });
+        if (!student) {
+            res.status(404).json({ error: 'Student not found' });
+            return;
+        }
+        res.status(200).json(student);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Unable to get student by name' });
+    }
+});
 // Add new student
 const addStudent = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -82,6 +98,7 @@ const deleteStudentById = (req, res) => __awaiter(void 0, void 0, void 0, functi
 exports.default = {
     getAllStudents,
     getStudentById,
+    getStudentByName,
     addStudent,
     updateStudentById,
     deleteStudentById
